@@ -5,7 +5,7 @@ const cors = require('cors')
 app.use(cors())
 
 app.get('/',function(peticion,respuesta){
-    respuesta.json(lista)
+    respuesta.send(lista)
 });
 
 app.listen(3000, () =>{
@@ -14,5 +14,5 @@ app.listen(3000, () =>{
  
 const lista = {
     "producto": "pantalon",
-    "precio" : 20,
+    "precio" : 20
 }
