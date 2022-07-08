@@ -5,7 +5,7 @@ const conexion = require('./db')
 
 app.use(cors())
 
-router.get('/', (req,res) => {
+app.get('/', (req,res) => {
     conexion.query('SELECT * FROM usuarios',(error,results)=>{
         if (error){
             throw error;
