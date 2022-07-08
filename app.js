@@ -4,10 +4,10 @@ const cors = require('cors')
 const conexion = require('./db')
 
 app.use(cors())
-
+app.set('view engine','ejs');
 
 app.get('/', (req,res) => {
-    res.send("HOLA CAPO ESTA ES UNA API PARA LOS PIBES, COMO USARLA :  /usuarios : esto te dara una lista de usuarios")
+    res.render("index")
 });
 app.get('/usuarios', (req,res) => {
     conexion.query('SELECT * FROM usuarios',(error,results)=>{
