@@ -1,11 +1,18 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
+const conexion = require('./db')
 
 app.use(cors())
 
-app.get('/',function(peticion,respuesta){
-    respuesta.send(lista)
+router.get('/', (req,res) => {
+    conexion.query('SELECT * FROM usuarios',(error,results)=>{
+        if (error){
+            throw error;
+        }else{
+            res.send(results)
+        }
+    }); 
 });
 
 app.listen(3000, () =>{
