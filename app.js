@@ -7,7 +7,7 @@ app.use(cors())
 app.set('view engine','ejs');
 
 app.get('/', (req,res) => {
-    res.render('index')
+    res.render('views/index')
 });
 app.get('/usuarios', (req,res) => {
     conexion.query('SELECT * FROM usuarios',(error,results)=>{
