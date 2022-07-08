@@ -7,7 +7,7 @@ app.use(cors())
 
 
 app.get('/', (req,res) => {
-    res.send("HOLA CAPO ESTA ES UNA API PARA LOS PIBES, COMO USARLA\n/usuarios : esto te dara una lista de usuarios")
+    res.send("HOLA CAPO ESTA ES UNA API PARA LOS PIBES, COMO USARLA :  /usuarios : esto te dara una lista de usuarios")
 });
 app.get('/usuarios', (req,res) => {
     conexion.query('SELECT * FROM usuarios',(error,results)=>{
