@@ -14,8 +14,7 @@ app.get('/usuarios', (req,res) => {
         if (error){
             throw error;
         }else{
-            requ = JSON.parse(req)
-            res.send(requ)
+            res.send(req)
         }
     }); 
 });
