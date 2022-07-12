@@ -16,15 +16,20 @@ const login = async (req, res) =>{
                 let passBD = results[0].pass
                 let compare = await bcrypt.compare(pass, passBD);
                 if (!compare){
-                    res.send("contraseña equivacada")
+                    res.json({
+                        state:"contraseña o usuario equivocado",
+                        data:[]
+                    })
                 }else{
-                    res.send("entraste")
+                    res.json({
+                        state:"entraste",
+                        data:[]
+                    })
                 }
             }
         }
     });
 }
-
 
 module.exports = {
     login: login
