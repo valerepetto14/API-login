@@ -5,7 +5,7 @@ const login = async (req, res) =>{
     let { body }= req
     let { user, pass } = body
     // const passcrypt = await bcrypt.hash(pass, 8)
-    conexion.query('SELECT user, pass FROM usuarios WHERE ?',{user:user},(error,results)=>{
+    conexion.query('SELECT user, pass FROM usuarios WHERE ?',{user:user},async (error,results)=>{
         if (error){
             throw error;
         }else{
@@ -16,7 +16,7 @@ const login = async (req, res) =>{
                 let passBD = results[0].pass
                 console.log(pass)
                 console.log(passBD)
-                let compare = auth(pass, passBD)
+                let compare = await bcrypt.compare(pass, passE);
                 if (!compare){
                     res.send("contraseña equivacada")
                 }else{
@@ -27,10 +27,6 @@ const login = async (req, res) =>{
     });
 }
 
-const auth = async (pass, passE)=>{
-    let compare = await bcrypt.compare(pass, passE);
-    return (compare);
-}
 
 module.exports = {
     login: login
