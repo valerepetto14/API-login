@@ -8,9 +8,12 @@ const verifytoken = (req,res,next) =>{
     }
     try {
         const verificar = jwt.verify(token, key)
-        console.log(verificar.rol)
-        req.user = verificar
-        next()
+        if(verificar.rol !== "admin"){
+            return res.status(401).json({error: "acceso denegado, no sos admin"})
+        }else{
+            req.user = verificar
+            next()
+        }
     } catch (error) {
         return res.status(401).json({error: "acceso denegado, token no es valido"})
     }
