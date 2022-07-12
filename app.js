@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
-const config = require('./config')
 const router = require('./routes')
 
 app.set('llave', config.key);

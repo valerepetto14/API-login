@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const conexion = require('./db')
 const register = require('./controllers/register')
-const jwt = require('jsonwebtoken')
 const login = require('./controllers/login')
 
 // router.post('/login', (req,res)=>{

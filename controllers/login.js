@@ -1,11 +1,13 @@
 const conexion = require('../db')
 const bcrypt = require('bcrypt');
+const config = require('../config')
+const jwt = require('jsonwebtoken')
 
 const login = async (req, res) =>{
     let { body }= req
     let { user, pass } = body
     // const passcrypt = await bcrypt.hash(pass, 8)
-    conexion.query('SELECT user, pass FROM usuarios WHERE ?',{user:user},async (error,results)=>{
+    conexion.query('SELECT id, user, pass FROM usuarios WHERE ?',{user:user},async (error,results)=>{
         if (error){
             throw error;
         }else{
@@ -21,9 +23,14 @@ const login = async (req, res) =>{
                         data:[]
                     })
                 }else{
+                    token = jwt.sign({
+                        id: results[0].id,
+                        name:user
+                    },config.key)
                     res.json({
                         state:"entraste",
-                        data:[]
+                        data:user,
+                        token:token
                     })
                 }
             }
