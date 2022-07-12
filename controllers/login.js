@@ -9,7 +9,8 @@ const login = async (req, res) =>{
         if (error){
             throw error;
         }else{
-            res.send(results[pass])
+            const data = JSON.parse(results)
+            res.send(data.pass)
         }
     });
 }
