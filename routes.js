@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const conexion = require('./db')
 const register = require('./controllers/register')
-const register = require('./controllers/login')
 const jwt = require('jsonwebtoken')
 const login = require('./controllers/login')
 
