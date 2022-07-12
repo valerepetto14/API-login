@@ -16,7 +16,7 @@ const login = async (req, res) =>{
                 let passBD = results[0].pass
                 console.log(pass)
                 console.log(passBD)
-                let compare = await bcrypt.compare(pass, passBD);
+                let compare = auth(pass, passBD)
                 if (compare){
                     res.send(compare)
                 }else{
@@ -25,6 +25,11 @@ const login = async (req, res) =>{
             }
         }
     });
+}
+
+const auth = async (pass, passE){
+    let compare = await bcrypt.compare(pass, passE);
+    return (compare);
 }
 
 module.exports = {
