@@ -27,7 +27,7 @@ const login = async (req, res) =>{
                         id: results[0].id,
                         name:user
                     }, key)
-                    res.json({
+                    res.header('auth-token',token).json({
                         state:"entraste",
                         data:user,
                         token:token

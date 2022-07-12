@@ -2,23 +2,12 @@ const router = require('express').Router()
 const conexion = require('./db')
 const register = require('./controllers/register')
 const login = require('./controllers/login')
+const verifytoken = require('./middleware/verifytoken')
 
-// router.post('/login', (req,res)=>{
-//     user = req.body.user;
-//     pass = req.body.pass;
-//     if (user === "valentin" && pass === "1234"){
-//         jwt.sign(id , 'secret_key' , (err,token) => {
-//             if(err){
-//                res.status(400).send({msg : 'Error'})
-//             }
-//             else{
-//                res.send({msg:'success' , token: token})
-//             }})
-//     }else{
-//         res.send("no sos vos")
-//     }
-// });
- 
+
+
+router.use('/admin', verifytoken);
+
 router.get('/usuarios', (req,res) => {
     conexion.query('SELECT * FROM usuarios',(error,results)=>{
         if (error){
@@ -29,7 +18,15 @@ router.get('/usuarios', (req,res) => {
     }); 
 });
 
+router.get('/admin', (req, res)=>{
+    res.status(200).json({
+        state: "ok",
+        user: req.user
+    })
+})
+
 router.post('/register',register.regis)
+
 router.post('/login',login.login)
 
 module.exports = router;
