@@ -14,9 +14,7 @@ const login = async (req, res) =>{
                 res.send("ese usuario no esta registrado")
             }else{
                 let passBD = results[0].pass
-                console.log(pass)
-                console.log(passBD)
-                let compare = await bcrypt.compare(pass, passE);
+                let compare = await bcrypt.compare(pass, passBD);
                 if (!compare){
                     res.send("contraseña equivacada")
                 }else{
