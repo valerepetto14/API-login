@@ -10,7 +10,8 @@ const login = async (req, res) =>{
             throw error;
         }else{
             // const data = JSON.parse(results)
-            res.send(typeof(results))
+            const password = results.pass
+            res.send(password)
         }
     });
 }
