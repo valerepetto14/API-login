@@ -7,7 +7,7 @@ const login = async (req, res) =>{
     let { body }= req
     let { user, pass } = body
     // const passcrypt = await bcrypt.hash(pass, 8)
-    conexion.query('SELECT id, user, pass FROM usuarios WHERE ?',{user:user},async (error,results)=>{
+    conexion.query('SELECT id, user, rol,pass FROM usuarios WHERE ?',{user:user},async (error,results)=>{
         if (error){
             throw error;
         }else{
@@ -25,7 +25,8 @@ const login = async (req, res) =>{
                 }else{
                     token = jwt.sign({
                         id: results[0].id,
-                        name:user
+                        name:user,
+                        rol: results[0].rol
                     }, key)
                     res.header('auth-token',token).json({
                         state:"entraste",
