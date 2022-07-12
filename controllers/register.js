@@ -9,7 +9,7 @@ const regis = async (req, res) =>{
         if (error){
             throw error;
         }else{
-            res.send(results)
+            res.send("registrado")
         }
     });
 }
