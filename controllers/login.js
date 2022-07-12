@@ -14,7 +14,10 @@ const login = async (req, res) =>{
                 res.send("no estas registrado/a")
             }else{
                 let passBD = results[0].pass
-                if (bcrypt.compare(pass,passBD)){
+                console.log(pass)
+                console.log(passBD)
+                let compare = await bcrypt.compare(pass, passBD);
+                if (compare){
                     res.send(compare)
                 }else{
                     res.send("Una de tus credenciales fallo")
