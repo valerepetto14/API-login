@@ -10,13 +10,12 @@ const login = async (req, res) =>{
             throw error;
         }else{
             // const data = JSON.parse(results)
-            if(results.length){
+            if(results.length == 0){
                 res.send("no estas registrado/a")
             }else{
-                let passBD = result[0].pass
-                let compare = bcrypt.compare(pass,passBD)
-                if (compare){
-                    res.send("Acceso exitoso")
+                let passBD = results[0].pass
+                if (bcrypt.compare(pass,passBD)){
+                    res.send(compare)
                 }else{
                     res.send("Una de tus credenciales fallo")
                 }
