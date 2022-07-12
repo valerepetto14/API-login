@@ -1,7 +1,9 @@
 const router = require('express').Router()
 const conexion = require('./db')
 const register = require('./controllers/register')
-jwt = require('jsonwebtoken')
+const register = require('./controllers/login')
+const jwt = require('jsonwebtoken')
+const login = require('./controllers/login')
 
 // router.post('/login', (req,res)=>{
 //     user = req.body.user;
@@ -30,5 +32,6 @@ router.get('/usuarios', (req,res) => {
 });
 
 router.post('/register',register.regis)
+router.post('/login',login.login)
 
 module.exports = router;
