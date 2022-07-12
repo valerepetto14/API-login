@@ -11,23 +11,23 @@ const login = async (req, res) =>{
         }else{
             // const data = JSON.parse(results)
             if(results.length == 0){
-                res.send("no estas registrado/a")
+                res.send("ese usuario no esta registrado")
             }else{
                 let passBD = results[0].pass
                 console.log(pass)
                 console.log(passBD)
                 let compare = auth(pass, passBD)
-                if (compare){
-                    res.send(compare)
+                if (!compare){
+                    res.send("contraseña equivacada")
                 }else{
-                    res.send("Una de tus credenciales fallo")
+                    res.send("entraste")
                 }
             }
         }
     });
 }
 
-const auth = async (pass, passE){
+const auth = async (pass, passE)=>{
     let compare = await bcrypt.compare(pass, passE);
     return (compare);
 }
