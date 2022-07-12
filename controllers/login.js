@@ -1,6 +1,6 @@
 const conexion = require('../db')
 const bcrypt = require('bcrypt');
-const config = require('../config')
+const key = require('../config').key
 const jwt = require('jsonwebtoken')
 
 const login = async (req, res) =>{
@@ -26,7 +26,7 @@ const login = async (req, res) =>{
                     token = jwt.sign({
                         id: results[0].id,
                         name:user
-                    },config.key)
+                    }, key)
                     res.json({
                         state:"entraste",
                         data:user,
