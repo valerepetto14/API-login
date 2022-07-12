@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors')
 const router = require('./routes')
 
-app.set('llave', config.key);
 app.set('view engine','ejs');
 
 //middles

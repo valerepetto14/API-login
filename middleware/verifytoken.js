@@ -19,4 +19,4 @@ const verifytoken = (req,res,next) =>{
     }
 }
 
-module.exports = authtoken;
+module.exports = verifytoken;
