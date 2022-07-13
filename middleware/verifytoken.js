@@ -8,7 +8,6 @@ const verifytoken = (req,res,next) =>{
     }
     try {
         const verificar = jwt.verify(token, key)
-        return res.status(401).json({error: "acceso denegado, no sos admin"})
         req.user = verificar
         next()
     } catch (error) {
