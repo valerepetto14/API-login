@@ -4,7 +4,7 @@ const key = require('../config').key
 const jwt = require('jsonwebtoken')
 
 const updatePass = (req, res) => {
-    const user = req.user.user
+    const user = req.user.name
     const pass = req.body.pass
     const newpass = req.body.newpass
     conexion.query("SELECT pass FROM usuarios WHERE ?",{user:user}, async (error, results)=>{
