@@ -33,5 +33,5 @@ router.get('/admin', (req, res)=>{
 
 router.post('/register',register.regis)
 router.post('/login',login.login)
-router.post('updatepass', updatePass.updatePass)
+router.post('/updatepass', updatePass.updatePass)
 module.exports = router;
