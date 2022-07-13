@@ -11,13 +11,13 @@ const updatePass = (req, res) => {
         const passBD = results[0].pass
         const compare = await bcrypt.compare(pass,passBD)
         if (!compare){
-            req.status(401).json({
+            res.status(401).json({
                 state: "error",
                 error: "contraseña equivocada"
             })
         }else{
             conexion.query('UPDATE usuarios SET ? WHERE ?',{pass:newpass ,user:user}, (error,results)=>{
-                req.status(200).json({
+                res.status(200).json({
                     state: "ok",
                     user: user
                 })
