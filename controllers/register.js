@@ -16,7 +16,6 @@ const regis = async (req, res) =>{
         }
     });
 }
-
 module.exports = {
     regis: regis
 }
