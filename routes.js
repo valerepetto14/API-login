@@ -19,17 +19,17 @@ router.get('/usuarios', (req,res) => {
     
 });
 
-// router.get('/admin', (req, res)=>{
-//     const rol = req.user.rol
-//     if(rol !== "admin"){
-//         res.status(401).json({error: "acceso denegado, no sos admin"})
-//     }else{
-//     res.status(200).json({
-//         state: "ok",
-//         user: req.user
-//     })
-//     }
-// })
+router.get('/admin', (req, res)=>{
+    const rol = req.user.rol
+    if(rol !== "admin"){
+        res.status(401).json({error: "acceso denegado, no sos admin"})
+    }else{
+    res.status(200).json({
+        state: "ok",
+        user: req.user
+    })
+    }
+})
 
 router.post('/register',register.regis)
 
