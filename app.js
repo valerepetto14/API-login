@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 const router = require('./routes')
+const verifytoken = require('./middleware/verifytoken')
 
 app.set('view engine','ejs');
 
-//middles
+//middlewares
+router.use('/admin', verifytoken);
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cors())
