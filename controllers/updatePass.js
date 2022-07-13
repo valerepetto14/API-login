@@ -16,7 +16,8 @@ const updatePass = (req, res) => {
                 error: "contraseña equivocada"
             })
         }else{
-            conexion.query('UPDATE usuario SET pass = ? WHERE user = ?',[newpass, user], (error,results)=>{
+            newpasscrypt = await bcrypt.hash(newpass, 8)
+            conexion.query('UPDATE usuario SET pass = ? WHERE user = ?',[newpasscrypt, user], (error,results)=>{
                 if (error){
                     throw error
                 }else{
