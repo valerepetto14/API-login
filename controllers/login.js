@@ -25,7 +25,7 @@ const login = async (req, res) =>{
                 }else{
                     token = jwt.sign({
                         id: results[0].id,
-                        name:user,
+                        name: results[0].user,
                         rol: results[0].rol
                     }, key)
                     res.header('auth-token',token).json({
