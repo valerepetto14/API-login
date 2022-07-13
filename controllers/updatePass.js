@@ -16,7 +16,7 @@ const updatePass = (req, res) => {
                 error: "contraseña equivocada"
             })
         }else{
-            conexion.query('UPDATE usuarios SET ? WHERE ?',{pass:newpass ,user:user}, (error,results)=>{
+            conexion.query('UPDATE usuarios SET ? WHERE ?',{pass:newpass} ,{user:user}, (error,results)=>{
                 res.status(200).json({
                     state: "ok",
                     user: user
