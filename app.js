@@ -7,7 +7,7 @@ const verifytoken = require('./middleware/verifytoken')
 app.set('view engine','ejs');
 
 //middlewares
-app.use('/', verifytoken);
+app.use('/api', verifytoken);
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cors())

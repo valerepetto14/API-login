@@ -4,7 +4,7 @@ const register = require('./controllers/register')
 const login = require('./controllers/login')
 const updatePass = require('./controllers/updatePass')
 
-router.get('/usuarios', (req,res) => {
+router.get('/api/usuarios', (req,res) => {
     if (req.user.rol !== "admin"){
         res.status(401).json({error: "acceso denegado, no sos admin"})
     }else{
@@ -19,7 +19,7 @@ router.get('/usuarios', (req,res) => {
     
 });
 
-router.get('/admin', (req, res)=>{
+router.get('/api/admin', (req, res)=>{
     const rol = req.user.rol
     if(rol !== "admin"){
         res.status(401).json({error: "acceso denegado, no sos admin"})
@@ -33,5 +33,5 @@ router.get('/admin', (req, res)=>{
 
 router.post('/register',register.regis)
 router.post('/login',login.login)
-router.post('/updatepass', updatePass.updatePass)
+router.post('/api/updatepass', updatePass.updatePass)
 module.exports = router;
