@@ -17,7 +17,7 @@ const updatePass = (req, res) => {
             })
         }else{
             newpasscrypt = await bcrypt.hash(newpass, 8)
-            conexion.query('UPDATE usuario SET pass = ? WHERE user = ?',[newpasscrypt, user], (error,results)=>{
+            conexion.query('UPDATE usuarios SET pass = ? WHERE user = ?',[newpasscrypt, user], (error,results)=>{
                 if (error){
                     throw error
                 }else{
