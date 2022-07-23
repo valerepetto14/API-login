@@ -1,9 +1,7 @@
 const router = require('express').Router()
 const conexion = require('./db')
-const register = require('./controllers/register')
-const login = require('./controllers/login')
-const updatePass = require('./controllers/updatePass')
-const addTasks = require('./controllers/addTasks')
+const users = require('./controllers/users')
+const tasks = require('./controllers/Tasks')
 
 router.get('/api/usuarios', (req,res) => {
     if (req.user.rol !== "admin"){
@@ -17,7 +15,6 @@ router.get('/api/usuarios', (req,res) => {
             }
         })
     }
-    
 });
 
 router.get('/api/admin', (req, res)=>{
@@ -32,9 +29,9 @@ router.get('/api/admin', (req, res)=>{
     }
 })
 
-router.get('/tasks', (req, res) =>{
+router.get('/api/tasks', (req, res) =>{
     const rol = req.user.rol
-    if(rol !== "admim"){
+    if(rol !== "admin"){
         res.status(401).json({error: "acceso denegado, no sos admin"})
     }else{
         conexion.query('SELECT * FROM tasks;', (error,results)=>{
@@ -47,8 +44,8 @@ router.get('/tasks', (req, res) =>{
     }
 });
 
-router.post('/register',register.regis)
-router.post('/login',login.login)
-router.post('/api/updatepass', updatePass.updatePass)
-router.post('/api/addtasks',addTasks.addTasks)
+router.post('/register', users.register)
+router.post('/login',users.login)
+router.post('/api/updatepass', users.updatePass)
+router.post('/api/addtasks',tasks.addTasks)
 module.exports = router;

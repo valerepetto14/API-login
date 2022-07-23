@@ -3,11 +3,11 @@ const app = express();
 const cors = require('cors')
 const router = require('./routes')
 const verifytoken = require('./middleware/verifytoken')
-
-app.set('view engine','ejs');
+require('dotenv').config({path: './.env'})
+const port = process.env.PORT
 
 //middlewares
-app.use('/api/', verifytoken);
+app.use('/', verifytoken);
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cors())
@@ -18,7 +18,7 @@ app.get('/', (req,res) => {
     res.render('index')
 });
 
-app.listen(3000, () =>{
-    console.log("andandooo")
+app.listen(port, () =>{
+    console.log("andando")
 });
  
