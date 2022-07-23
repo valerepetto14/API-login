@@ -42,18 +42,29 @@ const login = async (req, res) =>{
 const regis = async (req, res) =>{
     const { body }= req
     const { user, name, lastname, rol, pass } = body
-    const passcrypt = await bcrypt.hash(pass, 8)
-    conexion.query('INSERT INTO usuarios SET ?',{user:user, name:name, lastname:lastname, rol:rol, pass:passcrypt},(error,results)=>{
-        if (error){
+    conexion.query('SELECT user FROM usuarios WHERE ?',{user:user}, async (error,results)=>{
+        if(error){
             throw error;
+        }else if(results.length == 0){
+            const passcrypt = await bcrypt.hash(pass, 8)
+            conexion.query('INSERT INTO usuarios SET ?',{user:user, name:name, lastname:lastname, rol:rol, pass:passcrypt},(error,results)=>{
+                if (error){
+                    throw error;
+                }else{
+                    res.json({
+                    state:"registrado",
+                    user: user
+                    })
+                }
+            });
         }else{
-            res.json({
-            state:"registrado",
-            user: user
-        })
+            res.status(401).json({
+                error: "ese user ya esta registrado"
+            })
         }
-    });
-}
+    })
+    }
+    
 
 const updatePass = (req, res) => {
     const user = req.user.name
