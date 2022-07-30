@@ -2,7 +2,7 @@ const conexion = require('../database/db')
 const bcrypt = require('bcrypt');
 const key = require('../config').key
 const jwt = require('jsonwebtoken')
-
+const usuarios = require('../sequelize/models/usuarios')
 
 const login = async (req, res) =>{
     let { body }= req
@@ -38,6 +38,38 @@ const login = async (req, res) =>{
             }
         }
     });
+}
+
+const loginSequelize = async(req,res)=>{
+    let { body }= req
+    let { user, pass } = body
+    const usuario = await usuarios.findAll({
+        attributes: ['user', 'pass', 'rol', 'id'],
+        where: { user: user }
+      })
+    if (!usuario){
+        res.send("ese usuario no esta registrado")
+    }else{
+        let passBD = usuario[0].pass
+        let compare = await bcrypt.compare(pass, passBD);
+        if (!compare){
+            res.json({
+                state:"contraseña o usuario equivocado",
+                data:[]
+            })
+        }else{
+            token = jwt.sign({
+                id: usuario[0].id,
+                name: usuario[0].user,
+                rol: usuario[0].rol
+            }, key)
+            res.header('auth-token',token).json({
+                state:"entraste",
+                data:user,
+                token:token
+            })
+        }
+    }
 }
 
 const regis = async (req, res) =>{
@@ -98,5 +130,6 @@ const updatePass = (req, res) => {
 module.exports = {
     login: login,
     register: regis,
-    updatePass: updatePass
+    updatePass: updatePass,
+    loginSequelize: loginSequelize
 }

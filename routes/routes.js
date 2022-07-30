@@ -61,6 +61,7 @@ router.get('/tasks', (req, res) =>{
 
 router.post('/register', users.register)
 router.post('/login',users.login)
+router.post('/logins',users.loginSequelize)
 router.post('/updatepass', users.updatePass)
 router.post('/addtasks',tasks.addTasks)
 module.exports = router;
