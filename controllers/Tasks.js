@@ -1,4 +1,4 @@
-const conexion = require('../db')
+const conexion = require('../database/db')
 
 const addTasks = (req, res) =>{
     const name = req.body.name;

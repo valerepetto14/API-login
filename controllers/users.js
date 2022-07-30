@@ -1,7 +1,8 @@
-const conexion = require('../db')
+const conexion = require('../database/db')
 const bcrypt = require('bcrypt');
 const key = require('../config').key
 const jwt = require('jsonwebtoken')
+
 
 const login = async (req, res) =>{
     let { body }= req

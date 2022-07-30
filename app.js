@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
-const router = require('./routes')
+const router = require('./routes/routes')
 const verifytoken = require('./middleware/verifytoken')
+const cookieParser = require('cookie-parser')
 require('dotenv').config({path: './.env'})
 const port = process.env.PORT
 
 //middlewares
+app.use(cookieParser())
 app.use('/', verifytoken);
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
