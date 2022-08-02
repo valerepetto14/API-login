@@ -51,13 +51,11 @@ router.get('/tasks', (req, res) =>{
             if (error){
                 throw error;
             }else{
-                res.json(results)
+                res.json(results).cookie('hola','holaa')
             }
         })
     }
 });
-
-
 
 router.post('/register', users.register)
 router.post('/login',users.login)

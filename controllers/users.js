@@ -14,14 +14,13 @@ const login = async (req, res) =>{
         }else{
             // const data = JSON.parse(results)
             if(results.length == 0){
-                res.send("ese usuario no esta registrado")
+                res.status(400).send("ese usuario no esta registrado")
             }else{
                 let passBD = results[0].pass
                 let compare = await bcrypt.compare(pass, passBD);
                 if (!compare){
-                    res.json({
+                    res.status(401).json({
                         state:"contraseña o usuario equivocado",
-                        data:[]
                     })
                 }else{
                     token = jwt.sign({
@@ -47,15 +46,14 @@ const loginSequelize = async(req,res)=>{
         attributes: ['user', 'pass', 'rol', 'id'],
         where: { user: user }
       })
-    if (!usuario){
-        res.send("ese usuario no esta registrado")
+    if (usuario.length === 0){
+        res.status(400).send("ese usuario no esta registrado")
     }else{
         let passBD = usuario[0].pass
         let compare = await bcrypt.compare(pass, passBD);
         if (!compare){
-            res.json({
+            res.status(401).json({
                 state:"contraseña o usuario equivocado",
-                data:[]
             })
         }else{
             token = jwt.sign({
@@ -118,8 +116,7 @@ const updatePass = (req, res) => {
                     throw error
                 }else{
                     res.status(200).json({
-                        state: "ok",
-                        user: user
+                        state: "contraseña cambiada"
                     })
                 }
             }) 
