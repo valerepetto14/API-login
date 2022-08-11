@@ -104,6 +104,7 @@ const updatePass = (req, res) => {
     const newpass = req.body.newpass
     conexion.query("SELECT pass FROM usuarios WHERE ?",{user:user}, async (error, results)=>{
         console.log(results)
+        console.log(pass)
         const passBD = results[0].pass
         const compare = await bcrypt.compare(pass,passBD)
         if (!compare){
