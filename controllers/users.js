@@ -98,7 +98,7 @@ const regis = async (req, res) =>{
     
 
 const updatePass = (req, res) => {
-    const user = req.user.name
+    const user = req.body.name
     const pass = req.body.pass
     const newpass = req.body.newpass
     conexion.query("SELECT pass FROM usuarios WHERE ?",{user:user}, async (error, results)=>{
