@@ -1,1 +1,1 @@
-docker build -it
+docker build -t api .
