@@ -11,8 +11,8 @@ const port = process.env.PORT
 app.use(cookieParser())
 app.use('/', verifytoken);
 app.use(express.urlencoded({extended:false}));
-app.use(express.json());
-app.use(cors())
+app.use(express.json());//logro que express entienda las request con body en json, ya que express no parsea el body
+app.use(cors())//permito que mi api pueda usarse por un cliente mas alla del localhost
 app.use('/', router)
 
 
@@ -20,7 +20,7 @@ app.get('/', (req,res) => {
     res.render('index')
 });
 
-app.listen(port, () =>{
+app.listen(3000, () =>{
     console.log("andando")
 });
  
