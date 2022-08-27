@@ -15,7 +15,7 @@ const login = async (req, res) =>{
             // const data = JSON.parse(results)
             if(results.length == 0){
                 res.status(400).json({
-                    "ese usuario no esta registrado"
+                    state:"ese usuario no esta registrado"
                 })
             }else{
                 let passBD = results[0].pass

@@ -1,20 +1,12 @@
 const mysql = require('mysql2');
 
-
 //pool de conexiones
 const conexion = mysql.createPool({
     connectionLimit : 10,
-    host: '54.94.125.72',
+    host: 'localhost',
     user: 'valentin',
-    password: 'Valentin2415@',
+    password: 'valentin',
     database: 'login'
-});
-
-conexion.connect((error)=>{
-    if(error){
-        throw error;
-    }
-    console.log("conexion arriba")
 });
 
 module.exports = conexion
