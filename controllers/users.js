@@ -14,13 +14,15 @@ const login = async (req, res) =>{
         }else{
             // const data = JSON.parse(results)
             if(results.length == 0){
-                res.status(400).send("ese usuario no esta registrado")
+                res.status(400).json({
+                    "ese usuario no esta registrado"
+                })
             }else{
                 let passBD = results[0].pass
                 let compare = await bcrypt.compare(pass, passBD);
                 if (!compare){
-                    res.status(401).json({
-                        state:"contraseña o usuario equivocado",
+                    res.status(400).json({
+                        state:"contraseña o usuario equivocado"
                     })
                 }else{
                     token = jwt.sign({
@@ -28,7 +30,7 @@ const login = async (req, res) =>{
                         name: results[0].user,
                         rol: results[0].rol
                     }, key)
-                    res.header('auth-token',token).json({
+                    res.status(200).header('auth-token',token).json({
                         state:"entraste",
                         data:user,
                         token:token
@@ -47,7 +49,8 @@ const loginSequelize = async(req,res)=>{
         where: { user: user }
       })
     if (usuario.length === 0){
-        res.status(400).send("ese usuario no esta registrado")
+        res.status(400).json({
+            state:"ese usuario no esta registrado"})
     }else{
         let passBD = usuario[0].pass
         let compare = await bcrypt.compare(pass, passBD);
@@ -61,7 +64,7 @@ const loginSequelize = async(req,res)=>{
                 name: usuario[0].user,
                 rol: usuario[0].rol
             }, key)
-            res.header('auth-token',token).json({
+            res.status(200).header('auth-token',token).json({
                 state:"entraste",
                 data:user,
                 token:token
@@ -82,7 +85,7 @@ const regis = async (req, res) =>{
                 if (error){
                     throw error;
                 }else{
-                    res.json({
+                    res.status(200).json({
                     state:"registrado",
                     user: user
                     })
@@ -90,7 +93,7 @@ const regis = async (req, res) =>{
             });
         }else{
             res.status(401).json({
-                error: "ese user ya esta registrado"
+                state: "ese user ya esta registrado"
             })
         }
     })

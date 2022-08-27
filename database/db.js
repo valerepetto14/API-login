@@ -1,10 +1,11 @@
 const mysql = require('mysql2');
 
-const conexion = mysql.createConnection({
+const conexion = mysql.createPool({
+    connectionLimit : 10,
     host: '54.94.125.72',
     user: 'valentin',
     password: 'Valentin2415@',
-    database: 'pruebas'
+    database: 'login'
 });
 
 conexion.connect((error)=>{
